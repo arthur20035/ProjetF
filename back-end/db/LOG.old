@@ -1,0 +1,14 @@
+2021/12/18-11:47:46.053 14bc Recovering log #126
+2021/12/18-11:47:46.053 14bc Level-0 table #128: started
+2021/12/18-11:47:46.118 14bc Level-0 table #128: 2497 bytes OK
+2021/12/18-11:47:46.478 14bc Delete type=0 #126
+2021/12/18-11:47:46.480 14bc Delete type=3 #125
+2021/12/18-11:47:46.552 d90 Compacting 4@0 + 1@1 files
+2021/12/18-11:47:46.592 d90 Generated table #130@0: 11 keys, 2220 bytes
+2021/12/18-11:47:46.592 d90 Compacted 4@0 + 1@1 files => 2220 bytes
+2021/12/18-11:47:46.664 d90 compacted to: files[ 0 1 0 0 0 0 0 ]
+2021/12/18-11:47:46.665 d90 Delete type=2 #101
+2021/12/18-11:47:46.695 d90 Delete type=2 #107
+2021/12/18-11:47:46.695 d90 Delete type=2 #110
+2021/12/18-11:47:46.695 d90 Delete type=2 #121
+2021/12/18-11:47:46.696 d90 Delete type=2 #128
