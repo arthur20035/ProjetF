@@ -1,20 +1,19 @@
 /** @jsxImportSource @emotion/react */
 // Layout
 import { useTheme } from "@mui/styles";
-import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import AddBoxIcon from "@mui/icons-material/AddBox";
-import InputAdornment from "@mui/material/InputAdornment";
 import Divider from "@mui/material/Divider";
 import Avatar from "@mui/material/Avatar";
+import InputEmoji from "react-input-emoji";
+
 import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
-import AccountCircle from "@mui/icons-material/AccountCircle";
 
 const CreerMembre = () => {
   const navigate = useNavigate();
@@ -39,6 +38,13 @@ const CreerMembre = () => {
         },
       },
     },
+    content: {
+      flex: "1 1 auto",
+      maxWidth: "150px",
+      "&.MuiTextField-root": {
+        marginRight: "50px",
+      },
+    },
     box: {
       width: "500px",
       height: "400px",
@@ -54,8 +60,6 @@ const CreerMembre = () => {
   });
 
   const [name, setName] = useState("");
-
-  const [password, setPassword] = useState("");
 
   const creerMembre = async () => {
     console.log("Entré");
@@ -74,18 +78,9 @@ const CreerMembre = () => {
         <form onSubmit={CreerMembre}>
           <Box
             component="form"
+            css={styles.box}
             sx={{
-              "& .MuiTextField-root": { m: 1, width: "56ch" },
-              width: 500,
-              height: 300,
-              backgroundColor: "black",
-              opacity: [0.5, 0.5, 0.5],
-              borderRadius: 5,
-              padding: 7,
-              "&:hover": {
-                backgroundColor: "black",
-                opacity: [0.5, 0.5, 0.5],
-              },
+              "& .MuiTextField-root": { m: 1, width: "50ch" },
             }}
             noValidate
             autoComplete="off"
@@ -96,39 +91,14 @@ const CreerMembre = () => {
                 sx={{ width: 56, height: 56, marginBottom: 3 }}
               ></Avatar>
             </center>
-            <TextField
-              id="name"
-              name="name"
-              label="Nom d'utilisateur"
-              variant="filled"
+            <InputEmoji
               value={name}
-              onChange={(e) => setName(e.target.value)}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <AccountCircle />
-                  </InputAdornment>
-                ),
-              }}
+              onChange={setName}
+              cleanOnEnter
+              css={styles.content}
+              onEnter={creerMembre}
               placeholder="Entrer votre nom d'utilisateur..."
             />
-            {/* <TextField
-              id="password"
-              name="password"
-              label="Mot de Passe"
-              variant="filled"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <AccountCircle />
-                  </InputAdornment>
-                ),
-              }}
-              placeholder="Entrer votre mot de passe..."
-              //helperText="Entrer un bon username"
-            /> */}
             <Divider sx={{ height: 30, m: 0.5 }} />
             <div>
               <center>
@@ -138,7 +108,7 @@ const CreerMembre = () => {
                   color="success"
                   centerRipple="true"
                   onClick={() => {
-                    creerMembre(name, password);
+                    creerMembre(name);
                   }}
                   endIcon={<AddBoxIcon />}
                 >

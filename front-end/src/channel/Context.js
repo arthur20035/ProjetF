@@ -22,8 +22,6 @@ export const Provider = ({ children }) => {
                 "utf-8"
               )
             );
-            alert(payload);
-
             oauth.email = payload.email;
             setCookie("oauth", oauth);
           } else {
@@ -44,7 +42,8 @@ export const Provider = ({ children }) => {
         },
       }}
     >
-      {children}
+      {" "}
+      {children}{" "}
     </Context.Provider>
   );
 };

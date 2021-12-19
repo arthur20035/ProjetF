@@ -1,13 +1,16 @@
 /** @jsxImportSource @emotion/react */
 // Layout
 import { useTheme } from "@mui/styles";
-import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import AddBoxIcon from "@mui/icons-material/AddBox";
-import InputAdornment from "@mui/material/InputAdornment";
 import Divider from "@mui/material/Divider";
+import UserContext from "./UserContext";
+import { useContext } from "react";
+
 import Avatar from "@mui/material/Avatar";
+import InputEmoji from "react-input-emoji";
+
 import { useState } from "react";
 import FormControl from "@mui/material/FormControl";
 
@@ -15,8 +18,6 @@ import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import { MessageTwoTone } from "@mui/icons-material";
 const CreerCanal = () => {
   const useStyles = (theme) => ({
     root: {
@@ -38,6 +39,13 @@ const CreerCanal = () => {
         },
       },
     },
+    content: {
+      flex: "1 1 auto",
+      maxWidth: "150px",
+      "&.MuiTextField-root": {
+        marginRight: "50px",
+      },
+    },
     box: {
       width: "500px",
       height: "400px",
@@ -54,12 +62,18 @@ const CreerCanal = () => {
 
   const [name, setName] = useState("");
   const navigate = useNavigate();
+  const { username } = useContext(UserContext);
+
   const creerCanal = async () => {
     console.log("Entré");
     console.log(name); //^6.0.2
     await axios.post("http://localhost:3001/channels", { name: name });
     console.log("Passé");
     navigate("/");
+  };
+
+  const handleChange = (e) => {
+    setName(e.target.value);
   };
 
   const styles = useStyles(useTheme());
@@ -72,7 +86,7 @@ const CreerCanal = () => {
               component="form"
               css={styles.box}
               sx={{
-                "& .MuiTextField-root": { m: 1, width: "10ch" },
+                "& .MuiTextField-root": { m: 1, width: "50ch" },
               }}
               noValidate
               autoComplete="off"
@@ -88,22 +102,15 @@ const CreerCanal = () => {
                 sx={{ m: 1, width: "90%" }}
                 variant="filled"
               >
-                <TextField
-                  id="name"
-                  name="name"
-                  label="Name du canal"
-                  variant="filled"
+                <span>{username}</span>
+
+                <InputEmoji
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <MessageTwoTone />
-                      </InputAdornment>
-                    ),
-                  }}
+                  onChange={setName}
+                  cleanOnEnter
+                  css={styles.content}
+                  onEnter={creerCanal}
                   placeholder="Entrer le nom de votre canal..."
-                  //helperText="Entrer un bon username"
                 />
                 <Divider sx={{ height: 30, m: 0.5 }} />
                 <div>

@@ -6,7 +6,7 @@ import { Button, TextField } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useTheme } from "@mui/styles";
 import InputEmoji from "react-input-emoji";
-import Context from "./Context";
+import Context from "../Context";
 import { useContext } from "react";
 
 const useStyles = (theme) => {
@@ -40,14 +40,14 @@ const Form = ({ addMessage, channel }) => {
   const styles = useStyles(useTheme());
   const [username, setUsername] = useState("");
 
-  const onSubmit = async (username) => {
+  const onSubmit = async () => {
     /*  */
 
     const { data: message } = await axios.post(
       `http://localhost:3001/channels/${channel.id}/messages`,
       {
         content: content,
-        author: "User",
+        author: oauth.email,
       }
     );
     addMessage(message);
@@ -56,6 +56,7 @@ const Form = ({ addMessage, channel }) => {
   const handleChange = (e) => {
     setContent(e.target.value);
   };
+  const { oauth } = useContext(Context);
   return (
     <form css={styles.form} noValidate>
       <InputEmoji
@@ -66,8 +67,6 @@ const Form = ({ addMessage, channel }) => {
         onEnter={onSubmit}
         placeholder="Entrer votre message..."
       />
-      {/*       {oauth ? oauth.email : oauth.email}
-       */}
     </form>
   );
 };
