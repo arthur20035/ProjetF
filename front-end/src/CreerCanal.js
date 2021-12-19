@@ -62,7 +62,6 @@ const CreerCanal = () => {
 
   const [name, setName] = useState("");
   const navigate = useNavigate();
-  const { username } = useContext(UserContext);
 
   const creerCanal = async () => {
     console.log("Entré");
@@ -102,8 +101,6 @@ const CreerCanal = () => {
                 sx={{ m: 1, width: "90%" }}
                 variant="filled"
               >
-                <span>{username}</span>
-
                 <InputEmoji
                   value={name}
                   onChange={setName}
